@@ -1,12 +1,18 @@
-# 🕵️ Intelligent Fraud Detection Using Graph Neural Networks
+<div align="center">
 
-> **Portfolio-level project** | PyTorch Geometric · Heterogeneous GAT · Streamlit  
-> Dataset: [IEEE-CIS Fraud Detection](https://www.kaggle.com/c/ieee-fraud-detection)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=200&section=header&text=Intelligent%20Fraud%20Detection&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=Graph%20Neural%20Networks%20%7C%20PyTorch%20Geometric%20%7C%20Heterogeneous%20GAT&descAlignY=58&descSize=17&animation=fadeIn" />
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?logo=pytorch)](https://pytorch.org)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?logo=streamlit)](https://streamlit.io)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=A78BFA&center=true&vCenter=true&width=700&lines=Heterogeneous+Graph+Attention+Network+🧠;Fraud+Ring+Detection+via+Graph+Structure+🕵️;590K+Transactions+%7C+AUC-ROC+~0.94;GNNExplainer+%2B+Streamlit+Dashboard;PyTorch+Geometric+%7C+IEEE-CIS+Dataset)](https://git.io/typing-svg)
+
+<br/>
+
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?style=for-the-badge&logo=pytorch)](https://pytorch.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit)](https://streamlit.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+
+</div>
 
 ---
 
@@ -33,11 +39,11 @@ Nodes:
   │   Transaction   │   │   Card   │   │  Email    │
   │  (590k nodes)   │   │  entity  │   │  domain   │
   └────────┬────────┘   └──────────┘   └───────────┘
-           │ uses_card ──────────────────────────────▶ Card
-           │ uses_email ─────────────────────────────▶ Email
-           │ uses_device ────────────────────────────▶ Device
-           │ uses_addr ──────────────────────────────▶ Address
-           │ same_card ──────────────────────────────▶ Transaction
+           │ uses_card  ────────────────────────────▶ Card
+           │ uses_email ────────────────────────────▶ Email
+           │ uses_device ───────────────────────────▶ Device
+           │ uses_addr  ────────────────────────────▶ Address
+           │ same_card  ────────────────────────────▶ Transaction
 
 How Fraud Rings Are Caught (3-hop example):
   TX_A → CARD_123 ← TX_B → DEVICE_456 ← TX_C
@@ -83,29 +89,23 @@ fraud_gnn/
 ### 1. Setup
 
 ```bash
-# Clone repo
-git clone https://github.com/YOUR_USERNAME/fraud-gnn.git
+git clone https://github.com/AnuragKumar0429/fraud-gnn.git
 cd fraud-gnn
 
-# Create virtual environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Install PyG compiled extensions (required for best compatibility)
-# 1) Check your torch version (example output: 2.11.0+cpu)
+# Check your torch version
 python -c "import torch; print(torch.__version__)"
 
-# 2) Install matching wheels from data.pyg.org
-# Example for torch 2.11.0 + CPU:
+# Install matching PyG wheels (example: torch 2.11.0 + CPU)
 pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.11.0+cpu.html
 
-# Example for torch 2.11.0 + CUDA 12.1:
+# For CUDA 12.1
 pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.11.0+cu121.html
 
-# 3) Ensure torch-geometric is installed
 pip install torch-geometric
 ```
 
@@ -117,8 +117,7 @@ pip install kaggle
 kaggle competitions download -c ieee-fraud-detection -p data/
 cd data && unzip ieee-fraud-detection.zip
 
-# Option B: Manual download
-# https://www.kaggle.com/c/ieee-fraud-detection/data
+# Option B: Manual → https://www.kaggle.com/c/ieee-fraud-detection/data
 # Place train_transaction.csv and train_identity.csv in data/
 ```
 
@@ -148,16 +147,13 @@ python train.py \
 ```bash
 streamlit run app.py
 ```
-
 Open [http://localhost:8501](http://localhost:8501)
 
-### 5. Generate Interactive PyVis Graph (HTML)
+### 5. Generate Interactive PyVis Graph
 
 ```bash
 python utils/visualization.py
 ```
-
-This generates an interactive HTML graph you can open in a browser.
 
 ---
 
@@ -237,16 +233,9 @@ clusters = detect_fraud_clusters(G, fraud_probs, threshold=0.5)
 ### Streamlit Cloud
 
 ```bash
-# 1. Push to GitHub
 git add . && git commit -m "Initial commit" && git push
-
-# 2. Go to share.streamlit.io
-# 3. Connect your GitHub repo
-# 4. Set main file: app.py
-# 5. Add secrets (if needed) in Settings > Secrets
-
+# Go to share.streamlit.io → Connect repo → Set main file: app.py
 # Note: Pre-compute artifacts locally and commit models/saved/ to repo
-# The app.py loads pre-computed results; no GPU needed for serving
 ```
 
 ### Docker
@@ -268,61 +257,13 @@ docker run -p 8501:8501 fraud-gnn
 
 ---
 
-## 📎 GitHub Portfolio Setup
-
-```bash
-# Initialize repo
-git init
-git add .
-git commit -m "feat: Graph Neural Network Fraud Detection system
-
-- Heterogeneous GAT with 3 conv layers + batch norm + dropout
-- Graph construction: 5 node types, 4 edge relation types
-- Weighted cross-entropy for 3.5% fraud imbalance
-- GNNExplainer for prediction interpretability
-- Streamlit dark-theme dashboard with interactive graph viz"
-
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/fraud-gnn.git
-git push -u origin main
-```
-
-**Recommended repository settings:**
-- Add `data/` to `.gitignore` (large files)
-- Include sample outputs in `models/saved/` for demo
-- Add GitHub Actions for linting (optional)
-- Create a `demo.gif` of the Streamlit dashboard for README
-
----
-
-## 📝 Resume Bullets
-
-```
-• Architected a production-grade fraud detection system using Heterogeneous Graph
-  Attention Networks (PyTorch Geometric) on 590K transactions, modeling card/device/
-  email entity relationships across 5 node types and 4 edge types to detect fraud rings
-  invisible to tabular ML — achieving AUC-ROC ~0.94.
-
-• Engineered end-to-end ML pipeline: merged and preprocessed 590K+ transaction records,
-  resolved 90%+ sparse features, handled 3.5% class imbalance via weighted cross-entropy
-  loss, and deployed an interactive Streamlit dashboard with GNNExplainer interpretability
-  and real-time fraud probability scoring.
-
-• Applied graph-based explainability (GNNExplainer + Gradient×Input attribution) to surface
-  top fraud predictors (TransactionAmt, card1 reuse, C-feature aggregates), enabling
-  business-actionable fraud ring detection through Louvain community clustering on the
-  transaction graph.
-```
-
----
-
 ## 🏆 What Makes This Top 5%
 
-1. **Heterogeneous graph** (not homogeneous) — most Kaggle solutions use flat features
+1. **Heterogeneous graph** — most Kaggle solutions use flat features
 2. **GNNExplainer** — interpretability is rare in competition notebooks
-3. **Fraud ring detection** via community clustering — this is what banks actually care about
+3. **Fraud ring detection** via community clustering — what banks actually care about
 4. **Production architecture** — modular code, CLI args, model registry, dashboard
-5. **Weighted loss + class analysis** — not just SMOTE which distorts graph structure
+5. **Weighted loss + class analysis** — not SMOTE which distorts graph structure
 6. **Entity node embeddings** — cards/devices learn their own behavior profile
 
 ### Bonus Improvements
@@ -340,10 +281,60 @@ git push -u origin main
 
 ---
 
+## 📝 Resume Bullets
+
+```
+- Architected a production-grade fraud detection system using Heterogeneous Graph
+  Attention Networks (PyTorch Geometric) on 590K transactions, modeling card/device/
+  email entity relationships across 5 node types and 4 edge types to detect fraud rings
+  invisible to tabular ML — achieving AUC-ROC ~0.94.
+
+- Engineered end-to-end ML pipeline: merged and preprocessed 590K+ transaction records,
+  resolved 90%+ sparse features, handled 3.5% class imbalance via weighted cross-entropy
+  loss, and deployed an interactive Streamlit dashboard with GNNExplainer interpretability
+  and real-time fraud probability scoring.
+
+- Applied graph-based explainability (GNNExplainer + Gradient×Input attribution) to surface
+  top fraud predictors (TransactionAmt, card1 reuse, C-feature aggregates), enabling
+  business-actionable fraud ring detection through Louvain community clustering on the
+  transaction graph.
+```
+
+---
+
 ## 📚 References
 
 - [IEEE-CIS Fraud Detection Dataset](https://www.kaggle.com/c/ieee-fraud-detection)
 - [PyTorch Geometric Documentation](https://pytorch-geometric.readthedocs.io)
-- [GNNExplainer: Generating Explanations for Graph Neural Networks](https://arxiv.org/abs/1903.03894)
-- [Graph Attention Networks](https://arxiv.org/abs/1710.10903)
+- [GNNExplainer Paper](https://arxiv.org/abs/1903.03894)
+- [Graph Attention Networks Paper](https://arxiv.org/abs/1710.10903)
 - [Fraud Detection on Financial Networks with Multi-Scale GNN](https://arxiv.org/abs/2209.09612)
+
+---
+
+## 🙏 Acknowledgements
+- [Kaggle IEEE-CIS](https://www.kaggle.com/c/ieee-fraud-detection) — For the dataset
+- [PyTorch Geometric](https://pytorch-geometric.readthedocs.io) — For the GNN framework
+- [Shields.io](https://shields.io) — For beautiful badges
+- [Capsule Render](https://github.com/kyechan99/capsule-render) — For the animated banner
+- [Streamlit](https://streamlit.io) — For the interactive dashboard
+
+---
+
+<div align="center">
+
+**Anurag Kumar Upadhyay**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anurag-kumar-upadhyay-9a2105285/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnuragKumar0429)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:akupadhaya01@gmail.com)
+
+<br/>
+
+**If this project helped you, please ⭐ star the repo — it means the world!**
+
+Made with ❤️ by **[Anurag Kumar Upadhyay](https://github.com/AnuragKumar0429)**
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:24243e,50:302b63,100:0f0c29&height=120&section=footer&animation=fadeIn" width="100%"/>
+
+</div>
